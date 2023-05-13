@@ -44,7 +44,7 @@ function ToggleCompleted(e) {
     UpdateToDo(e.target.dataset.id, e.target.classList.contains("done"));
 }
 const UpdateToDo = (id, completed) => {
-    fetch(`$\{apiUrl}/${id}`, {
+    fetch(`${apiUrl}/${id}`, {
         method: "PUT",
         body:Json.stringify({completed}),
         headers: {
@@ -53,11 +53,22 @@ const UpdateToDo = (id, completed) => {
     }).then((res) => res.json()).then((data) => console.log(data))
 }
 
+function deleteToDo(e){
+       if (e.target.classList.contains("todo")){
+           const id = e.target.dataset.id;
+           fetch(`${apiUrl}/${id}` , {
+               method: "DELETE"
+           }).then((res) => res.json()).then(() => e.target.remove())
+       }
+
+}
+
 const init = () =>{ //this is a function but Arrow format
 
     document.addEventListener("DOMContentLoaded",GetFunction)
     document.querySelector("#todo-form").addEventListener("submit",CreateTodo)
     document.querySelector("#todo-list").addEventListener("click",ToggleCompleted)
+    document.querySelector("#todo-list").addEventListener("dblclick",deleteToDo);
 }
 init();
 
