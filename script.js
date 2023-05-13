@@ -7,9 +7,13 @@ function GetFunction(){
            data.forEach((todo) => {
                const div = document.createElement('div');
                div.appendChild(document.createTextNode(todo.title));
-
+         if (todo.completed){
+   div.classList.add.done;
+         }
+               document.getElementById("todo-list").appendChild(div);
            })
         })
 }
+
 
 GetFunction();
