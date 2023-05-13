@@ -5,15 +5,18 @@ function GetFunction(){
         .then((data) => {
 
            data.forEach((todo) => {
-               const div = document.createElement('div');
-               div.appendChild(document.createTextNode(todo.title));
-         if (todo.completed){
-   div.classList.add.done;
-         }
-               document.getElementById("todo-list").appendChild(div);
+             AddToDom(todo);
            })
         })
 }
-
+function AddToDom(todo){
+    const div = document.createElement('div');
+    div.appendChild(document.createTextNode(todo.title));
+    div.setAttribute("data-id",todo.id) // to make an id
+    if (todo.completed){
+        div.classList.add.done;
+    }
+    document.getElementById("todo-list").appendChild(div);
+}
 
 GetFunction();
